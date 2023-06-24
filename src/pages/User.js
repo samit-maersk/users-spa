@@ -3,7 +3,7 @@ import React from 'react'
 const User = () => {
   return (
     <div>
-       <p class="fs-2">User</p>
+       <p className="fs-2">User</p>
     </div>
   )
 }

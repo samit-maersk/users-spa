@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Error from './Error'
 import Modal from '../components/Modal'
+import { useDispatch, useSelector } from 'react-redux'
+import Table from '../components/Table'
+import { deleteUser } from '../redux/userSlice'
 
 const Users = () => {
+  const dispatch = useDispatch()
+  const { data, loading, error } = useSelector((state) => state.users)
 
-  if(false) {
+  const editUser = (e) => {
+    console.log(e)
+  }
+
+  const removeUser = (e) => {
+    console.log(e)
+    dispatch(deleteUser(e))
+  }
+
+  if(loading) {
     return (
       <div className='d-flex justify-content-center'>
         <div className="spinner-border text-primary" role="status">
@@ -14,13 +28,12 @@ const Users = () => {
     )
   }
 
-  if(false) {
+  if(error) {
     return (
-      <Error message={"user not found"}/>
+      <Error message={error}/>
     )
   }
-
-
+  
   return (
       <div>
         <div className="d-flex justify-content-center">
@@ -30,37 +43,8 @@ const Users = () => {
           </button>
         </div>
         
-        <Modal />
-
-        <table className="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th scope="col">id</th>
-              <th scope="col">username</th>
-              <th scope="col">email</th>
-              <th scope="col">action</th>
-              
-            </tr>
-          </thead>
-          <tbody>
-            {[1].map((idx, item) => (
-              <tr key={idx}>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>
-                    <button className="btn btn-default btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                      <i className="bi bi-pen"></i>
-                    </button>
-                    <button className="btn btn-default btn-outline-danger">
-                      <i className="bi bi-trash3"></i>
-                    </button>
-                </td>
-              </tr>
-            ))}
-            
-          </tbody>
-        </table>
+        <Modal/>
+        <Table data={data} editUser={editUser} deleteUser={removeUser}/>
       </div>
   )
 }

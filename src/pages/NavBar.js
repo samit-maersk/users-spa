@@ -5,11 +5,9 @@ const NavBar = () => {
   return (
     <nav className="navbar bg-body-tertiary">
         <div className="container">
-          <a className="navbar-brand" href="#">
-            <Link to="/">
-              <i className="bi bi-house h2"></i>
-            </Link>
-          </a>
+          <Link className="navbar-brand" to="/">
+            <i className="bi bi-house h2"></i>
+          </Link>
           
           <form className="d-flex" role="search">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
