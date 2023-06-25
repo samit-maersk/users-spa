@@ -39,12 +39,12 @@ const Users = () => {
         <div className="d-flex justify-content-center">
           <button className="btn btn-default btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             <i className="bi bi-person-plus-fill h3"></i>
-            {true ? '' : <p className="fw-lighter">Add User</p>}
+            {data.length === 0 ? <p className="fw-lighter">Add User</p> : ''}
           </button>
         </div>
         
         <Modal/>
-        <Table data={data} editUser={editUser} deleteUser={removeUser}/>
+        {data.length > 0 ? <Table data={data} editUser={editUser} deleteUser={removeUser}/> : <Error errorType={"404"} message={"No Data found, Please create some"}/>}
       </div>
   )
 }
