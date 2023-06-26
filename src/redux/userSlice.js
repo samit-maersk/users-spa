@@ -40,8 +40,9 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    getDataByPageNumber: (state, action) => {
-        state.pageData = state.data.slice(action.payload.pageNo - 1, action.payload.limit)
+    dataByPageNumber: (state, action) => {
+        const { page, limit } = action.payload
+        state.pageData = state.data.slice((page-1)*limit, page*limit)
     }
   },
   extraReducers: (builder) => {
@@ -99,6 +100,6 @@ export const userSlice = createSlice({
   }
 })
 
-export const { getDataByPageNumber } = userSlice.actions
+export const { dataByPageNumber } = userSlice.actions
 
 export default userSlice.reducer

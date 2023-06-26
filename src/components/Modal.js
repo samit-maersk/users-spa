@@ -6,6 +6,10 @@ const Modal = ({operation="Add New User", id="new", data={id:"",name:"",email:""
     const dispatch = useDispatch();
 
     const [user, setUser] = React.useState(data)
+    // TODO Fix it : going into infinite loop
+    // React.useEffect(() => {
+    //     setUser(data)
+    // }, [data])
 
     const handleChange = (e) => {
         setUser({
@@ -14,7 +18,7 @@ const Modal = ({operation="Add New User", id="new", data={id:"",name:"",email:""
         })
     }
     const handleSubmit = (e) => {
-        if(Object.keys(data).length === 0){
+        if(user.id === ""){
             dispatch(addUser(user));
         } else {
             dispatch(editUser(user));

@@ -3,11 +3,11 @@ import Error from './Error'
 import Modal from '../components/Modal'
 import { useDispatch, useSelector } from 'react-redux'
 import Table from '../components/Table'
-import { deleteUser } from '../redux/userSlice'
+import { dataByPageNumber, deleteUser } from '../redux/userSlice'
 
 const Users = () => {
   const dispatch = useDispatch()
-  const { data, loading, error } = useSelector((state) => state.users)
+  const { data, pageData, loading, error } = useSelector((state) => state.users)
   
   const [paginatedData,setPaginatedData] = useState([])
 
@@ -16,11 +16,12 @@ const Users = () => {
   const [limit, setLimit] = useState(5)
   
   const handleLimitChange = (e) => {
+    setPage(1)
     setLimit(e.target.value)
   }
 
   useEffect(() => {
-    setPaginatedData(data.slice((page-1), limit))
+    dispatch(dataByPageNumber({page: page, limit: limit}))
   }, [data, page, limit])
 
   const removeUser = (e) => {
@@ -63,15 +64,15 @@ const Users = () => {
         <Modal />
         { data.length > 0 ? (
           <>
-            <Table data={paginatedData} deleteUser={removeUser}/>
+            <Table data={pageData} deleteUser={removeUser}/>
 
             <div className="d-flex justify-content-center">
-              <select onChange={handleLimitChange}>
+              <select onChange={ handleLimitChange }>
                 <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="20">20</option>
               </select>
-              { convertNumberToArray(Math.ceil(data.length / limit)).map((c, idx) => <button key={idx} className='btn btn-outline-primary' onClick={() => setPage(c)}>{c}</button>)}
+              { convertNumberToArray(Math.ceil(data.length / limit)).map((c, idx) => <button key={idx} className={page === c ? 'btn btn-primary' : 'btn btn-outline-primary'} onClick={() => setPage(c)}>{c}</button>)}
             </div>
           </>
           ) : <Error errorType={"404"} message={"No Data found, Please create some"}/>}

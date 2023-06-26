@@ -2,9 +2,11 @@ import React from 'react'
 import Modal from './Modal'
 
 const Table = ({data=[], deleteUser = () => {}}) => {
+
   return (
     <>
     {data && data.map((item, idx) => <Modal key={idx} operation="Update User" id={item.id} data={item}/>)}
+    
     <table className="table table-striped table-hover">
           <thead>
             <tr>
