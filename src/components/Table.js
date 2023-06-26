@@ -1,7 +1,10 @@
 import React from 'react'
+import Modal from './Modal'
 
-const Table = ({data=[], editUser = () => {}, deleteUser = () => {}}) => {
+const Table = ({data=[], deleteUser = () => {}}) => {
   return (
+    <>
+    {data && data.map((item, idx) => <Modal key={idx} operation="Update User" id={item.id} data={item}/>)}
     <table className="table table-striped table-hover">
           <thead>
             <tr>
@@ -14,18 +17,19 @@ const Table = ({data=[], editUser = () => {}, deleteUser = () => {}}) => {
               <tr key={idx}>
                 {Object.keys(data[0] ? data[0] : []).map((colItem, colIdx) => <td key={colIdx}>{item[colItem]}</td> )}
                 
-                <td>
-                    <button className="btn btn-default btn-outline-primary" disabled data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => editUser(item)}>
-                      <i className="bi bi-pen"></i>
-                    </button>
-                    <button className="btn btn-default btn-outline-danger" onClick={() => deleteUser(item.id)}>
-                      <i className="bi bi-trash3"></i>
-                    </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+              <td>
+                  <button className="btn btn-default btn-outline-primary" data-bs-toggle="modal" data-bs-target={"#staticBackdrop-"+item.id}>
+                    <i className="bi bi-pen"></i>
+                  </button>
+                  <button className="btn btn-default btn-outline-danger" onClick={() => deleteUser(item.id)}>
+                    <i className="bi bi-trash3"></i>
+                  </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+  </table>
+        </>
   )
 }
 

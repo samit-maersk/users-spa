@@ -1,3 +1,7 @@
-table tbody tr td button {
+button {
   margin: 0px 5px 0px 5px;
+}
+
+.error {
+  margin-top: 10px;
 }

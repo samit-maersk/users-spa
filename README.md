@@ -1,6 +1,6 @@
 # users-sap
+To buidl and generate a cdn deployable :
 
 ```bash
-npm install react-redux react-router-dom
-
+npm run build
 ```

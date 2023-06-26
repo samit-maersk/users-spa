@@ -31,6 +31,7 @@ export const deleteUser = createAsyncThunk(
 
 const initialState = {
   data: [],
+  pageData: {},
   error: null,
   loading: false,
 }
@@ -39,6 +40,9 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    getDataByPageNumber: (state, action) => {
+        state.pageData = state.data.slice(action.payload.pageNo - 1, action.payload.limit)
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -85,7 +89,6 @@ export const userSlice = createSlice({
             state.loading = true;
         })
         .addCase(deleteUser.fulfilled, (state, action) => {
-            console.log(action.payload)
             state.loading = false;
             state.data = state.data.filter((item) => item.id !== action.payload)
         })
@@ -96,6 +99,6 @@ export const userSlice = createSlice({
   }
 })
 
-//export const {  } = userSlice.actions
+export const { getDataByPageNumber } = userSlice.actions
 
 export default userSlice.reducer
