@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 
 const Dashboard = () => {
+  document.title = 'Users::Dashboard'
   const dispatch = useDispatch();
   const {data} = useSelector((state) => state.users);
 

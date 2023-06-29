@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from '../axios'
-
+import _axios from 'axios';
 export const allUsers = createAsyncThunk(
   "users/all",
   async () => {
@@ -50,6 +50,19 @@ export const searchUserByEmail = createAsyncThunk(
     }
 );
 
+export const searchByNameOrEmail = createAsyncThunk(
+    "users/search",
+    async (nameOrEmail) => {
+        return _axios
+            .all([
+                axios.get(`/users/search/name/${nameOrEmail}`).then(r => r.data), 
+                axios.get(`/users/search/email/${nameOrEmail}`).then(r => r.data)
+            ])
+            .then(_axios.spread((...responses) => {
+            return [...responses[0], ...responses[1]]
+        }))
+    }
+);
 
 const initialState = {
   data: [],
@@ -144,6 +157,7 @@ export const userSlice = createSlice({
             state.loading = false;
             state.error = action.error.message;
         })
+        
         //search by email
         .addCase(searchUserByEmail.pending, (state) => {
             state.loading = true;
@@ -157,6 +171,18 @@ export const userSlice = createSlice({
             state.error = action.error.message;
         })
 
+        //search by name or email
+        .addCase(searchByNameOrEmail.pending, (state) => {
+            state.loading = true;
+        })
+        .addCase(searchByNameOrEmail.fulfilled, (state, action) => {
+            state.loading = false;
+            state.data = action.payload
+        })
+        .addCase(searchByNameOrEmail.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        })
   }
 })
 

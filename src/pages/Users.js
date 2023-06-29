@@ -4,8 +4,10 @@ import Modal from '../components/Modal'
 import { useDispatch, useSelector } from 'react-redux'
 import Table from '../components/Table'
 import { dataByPageNumber, deleteUser } from '../redux/userSlice'
+import Search from './Search'
 
 const Users = () => {
+  document.title = 'Users :: all'
   const dispatch = useDispatch()
   const { data, pageData, loading, error } = useSelector((state) => state.users)
   

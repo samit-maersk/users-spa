@@ -5,7 +5,7 @@ const Table = ({data=[], deleteUser = () => {}}) => {
 
   return (
     <>
-    {data && data.map((item, idx) => <Modal key={idx} operation="Update User" id={item.id} data={item}/>)}
+    {data.map((item, idx) => <Modal key={idx} operation="Update User" id={item.id} data={item}/>)}
     
     <table className="table table-striped table-hover">
           <thead>
@@ -15,7 +15,7 @@ const Table = ({data=[], deleteUser = () => {}}) => {
             </tr>
           </thead>
           <tbody>
-            {data && data.map((item, idx) => (
+            {data.map((item, idx) => (
               <tr key={idx}>
                 {Object.keys(data[0] ? data[0] : []).map((colItem, colIdx) => <td key={colIdx}>{item[colItem]}</td> )}
                 
