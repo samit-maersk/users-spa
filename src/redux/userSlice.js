@@ -29,6 +29,28 @@ export const deleteUser = createAsyncThunk(
     }
 );
 
+export const userById = createAsyncThunk(
+    "users/byId",
+    async (id) => {
+        return axios.get(`/users/${id}`).then((res) => res.data);
+    }
+);
+
+export const searchUserByName = createAsyncThunk(
+    "users/search/name",
+    async (name) => {
+        return axios.get(`/users/search/name/${name}`).then((res) => res.data);
+    }
+);
+
+export const searchUserByEmail = createAsyncThunk(
+    "users/search/email",
+    async (email) => {
+        return axios.get(`/users/search/email/${email}`).then((res) => res.data);
+    }
+);
+
+
 const initialState = {
   data: [],
   pageData: {},
@@ -97,6 +119,44 @@ export const userSlice = createSlice({
             state.loading = false;
             state.error = action.error.message;
         })
+        //read by id
+        .addCase(userById.pending, (state) => {
+            state.loading = true;
+        })
+        .addCase(userById.fulfilled, (state, action) => {
+            state.loading = false;
+            state.data = action.payload
+        })
+        .addCase(userById.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        }) 
+        
+        //search by name
+        .addCase(searchUserByName.pending, (state) => {
+            state.loading = true;
+        })
+        .addCase(searchUserByName.fulfilled, (state, action) => {
+            state.loading = false;
+            state.data = action.payload
+        })
+        .addCase(searchUserByName.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        })
+        //search by email
+        .addCase(searchUserByEmail.pending, (state) => {
+            state.loading = true;
+        })
+        .addCase(searchUserByEmail.fulfilled, (state, action) => {
+            state.loading = false;
+            state.data = action.payload
+        })
+        .addCase(searchUserByEmail.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        })
+
   }
 })
 

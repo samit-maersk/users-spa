@@ -2,14 +2,14 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { addUser, editUser } from '../redux/userSlice';
 
-const Modal = ({operation="Add New User", id="new", data={id:"",name:"",email:""}}) => {
+const Modal = (props) => {
     const dispatch = useDispatch();
-
+    const {operation="Add New User", id="new", data={id:"",name:"",email:""}} = props
     const [user, setUser] = React.useState(data)
-    // TODO Fix it : going into infinite loop
-    // React.useEffect(() => {
-    //     setUser(data)
-    // }, [data])
+    
+    React.useEffect(() => {
+        setUser(data)
+    }, [props]) //just data gives so many Maximum update depth exceeded" warning. So, props is used
 
     const handleChange = (e) => {
         setUser({
@@ -39,13 +39,13 @@ const Modal = ({operation="Add New User", id="new", data={id:"",name:"",email:""
                     </div>
                     <div className="modal-body">
                         <div className="form-floating">
-                            <input type="text" className="form-control" id="floatingName" placeholder="Name" name='name' value={user.name} onChange={handleChange}/>
-                            <label htmlFor="floatingName">Name</label>
+                            <input type="text" className="form-control" id={"floatingName-"+id} placeholder="Name" name='name' value={user.name} onChange={handleChange}/>
+                            <label htmlFor={"floatingName-"+id}>Name</label>
                         </div>
                         <br/>
                         <div className="form-floating mb-3">
-                            <input type="email" className="form-control" id="floatingEmail" validate="true" placeholder="name@example.com" name='email' value={user.email} onChange={handleChange}/>
-                            <label htmlFor="floatingEmail">Email address</label>
+                            <input type="email" className="form-control" id={"floatingEmail-"+id} validate="true" placeholder="name@example.com" name='email' value={user.email} onChange={handleChange}/>
+                            <label htmlFor={"floatingEmail-"+id}>Email address</label>
                         </div>
                     </div>
                     <div className="modal-footer">
