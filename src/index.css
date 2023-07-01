@@ -5,3 +5,12 @@ button {
 .error {
   margin-top: 10px;
 }
+
+form#login {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+form#login label {
+  color: gray;
+}

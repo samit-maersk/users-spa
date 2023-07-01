@@ -7,9 +7,9 @@ const instance = axios.create({
 
 // request interceptor
 instance.interceptors.request.use(function (config) {
+    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
     return config;
   }, function (error) {
-    // Do something with request error
     return Promise.reject(error);
   });
 
@@ -18,7 +18,13 @@ instance.interceptors.response.use(function (response) {
     console.log('Axios response interceptor')
     return response;
   }, function (error) {
-    // Do something with response error
+    
+    console.log(`Axios response interceptor error: ${error.response.status}`)
+    
+    if (error.response.status === 401 || error.response.status === 403) {
+        localStorage.removeItem('token');
+        //window.location.href = '/login';
+    }
     return Promise.reject(error);
   });
 

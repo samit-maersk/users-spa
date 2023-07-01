@@ -13,6 +13,7 @@ import ErrorPage from './pages/ErrorPage';
 import Dashboard from './pages/Dashboard';
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
+import Login from './pages/Login';
 
 
 const router = createBrowserRouter([
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: "/login",
+    element: <Login />,
+  }
   
 ]);
 
