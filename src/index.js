@@ -14,6 +14,8 @@ import Dashboard from './pages/Dashboard';
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
 import Login from './pages/Login';
+import ProtectedRoute from './components/ProtectedRoute';
+import Logout from './pages/Logout';
 
 
 const router = createBrowserRouter([
@@ -23,13 +25,21 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/logout",
+        element: <Logout />
+      },
+      {
         path: "/",
         element: <Dashboard />,
         errorElement: <ErrorPage />,
       },
       {
         path: "users",
-        element: <Users />,
+        element: <ProtectedRoute><Users /></ProtectedRoute>,
         errorElement: <ErrorPage />,
       },
       {
@@ -38,10 +48,6 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       }
     ]
-  },
-  {
-    path: "/login",
-    element: <Login />,
   }
   
 ]);

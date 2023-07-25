@@ -10,8 +10,7 @@ const Users = () => {
   document.title = 'Users :: all'
   const dispatch = useDispatch()
   const { data, pageData, loading, error } = useSelector((state) => state.users)
-  
-  const [paginatedData,setPaginatedData] = useState([])
+  const [paginatedData, setPaginatedData] = useState([])
 
   //Pagination
   const [page, setPage] = useState(1)
@@ -21,7 +20,7 @@ const Users = () => {
     setPage(1)
     setLimit(e.target.value)
   }
-
+  
   useEffect(() => {
     dispatch(dataByPageNumber({page: page, limit: limit}))
   }, [data, page, limit])
@@ -50,7 +49,7 @@ const Users = () => {
 
   if(error) {
     return (
-      <Error message={error}/>
+      <Error e={{message: error}}/>
     )
   }
   
@@ -77,7 +76,7 @@ const Users = () => {
               { convertNumberToArray(Math.ceil(data.length / limit)).map((c, idx) => <button key={idx} className={page === c ? 'btn btn-primary' : 'btn btn-outline-primary'} onClick={() => setPage(c)}>{c}</button>)}
             </div>
           </>
-          ) : <Error errorType={"404"} message={"No Data found, Please create some"}/>}
+          ) : <p>No data found..</p>}
       </div>
   )
 }

@@ -3,13 +3,11 @@ import axios from '../axios'
 
 export const login = createAsyncThunk(
     "auth/login",
-    async (data) => {
-        return axios.post('/login', data).then((res) => res.data);
-    }
-);
+    async (data) => axios.post('/login', data).then((res) => res.data));
 
 const initialState = {
     data: [],
+    isAuthenticated: false,
     error: null,
     loading: false,
 }
@@ -20,6 +18,7 @@ export const authSlice = createSlice({
     reducers: {
         logout: (state) => {
             state.data = [];
+            state.isAuthenticated = false;
             localStorage.removeItem('token');
         }
     },
@@ -31,6 +30,7 @@ export const authSlice = createSlice({
         .addCase(login.fulfilled, (state, action) => {
             state.loading = false;
             state.data = action.payload
+            state.isAuthenticated = true
             localStorage.setItem('token', action.payload.token);
         })
         .addCase(login.rejected, (state, action) => {

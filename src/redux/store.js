@@ -8,4 +8,8 @@ export const store = configureStore({
         auth: authSlice,
     },
 })
-store.dispatch(allUsers())
+console.log("store loaded")
+
+if(localStorage.getItem('token')) {
+    store.dispatch(allUsers())
+}
