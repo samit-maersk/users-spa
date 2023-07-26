@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Modal from './Modal'
 
 const Table = ({data=[], deleteUser = () => {}}) => {
-
   return (
     <>
     {data.map((item, idx) => <Modal key={idx} operation="Update User" id={item.id} data={item}/>)}

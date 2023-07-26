@@ -7,19 +7,24 @@ const instance = axios.create({
 
 // request interceptor
 instance.interceptors.request.use(function (config) {
+    const token = localStorage.getItem('token');
+    config.headers.Authorization = `Bearer ${token}`;
     return config;
-  }, function (error) {
-    // Do something with request error
-    return Promise.reject(error);
-  });
+}, function (error) {
+  return Promise.reject(error);
+});
 
 // response interceptor
 instance.interceptors.response.use(function (response) {
-    console.log('Axios response interceptor')
+    console.log(`Axios response interceptor ${response.status}`)
     return response;
-  }, function (error) {
-    // Do something with response error
-    return Promise.reject(error);
-  });
+}, function (error) {
+  const eStatus = error?.response?.status
+  console.log(`Axios response interceptor error: ${eStatus}`)
+  if (eStatus === 401 || eStatus === 403) {
+      localStorage.removeItem('token');
+  }
+  return Promise.reject(error);
+});
 
 export default instance;

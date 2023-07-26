@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from '../axios'
 import _axios from 'axios';
+
 export const allUsers = createAsyncThunk(
   "users/all",
   async () => {
+    console.log('users/all')
     return axios.get('/users').then((res) => res.data);
   }
 );
@@ -66,7 +68,7 @@ export const searchByNameOrEmail = createAsyncThunk(
 
 const initialState = {
   data: [],
-  pageData: {},
+  pageData: [],
   error: null,
   loading: false,
 }
@@ -84,16 +86,16 @@ export const userSlice = createSlice({
     builder
         //read
         .addCase(allUsers.pending, (state) => {
-        state.loading = true;
-        state.data = []
+            state.loading = true;
+            state.data = []
         })
         .addCase(allUsers.fulfilled, (state, action) => {
-        state.loading = false;
-        state.data = action.payload
+            state.loading = false;
+            state.data = action.payload
         })
         .addCase(allUsers.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
+            state.loading = false;
+            state.error = action.error.message;
         })
         //create
         .addCase(addUser.pending, (state) => {

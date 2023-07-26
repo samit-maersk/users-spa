@@ -14,7 +14,7 @@ function App() {
     
     <footer >
       <small className='text-lowercase'>
-        <p className="text-end fw-lighter">2023, all rights reserved!</p>
+        <p className="text-end fw-lighter">2023, &copy; all rights reserved!</p>
       </small>
     </footer>
   </div>
