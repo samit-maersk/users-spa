@@ -5,6 +5,7 @@ import _axios from 'axios';
 export const allUsers = createAsyncThunk(
   "users/all",
   async () => {
+    console.log('users/all')
     return axios.get('/users').then((res) => res.data);
   }
 );

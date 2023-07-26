@@ -28,7 +28,7 @@ const Login = () => {
         setSpinner(true)
         setTimeout(()=> {
             console.log(`Login - ${data},${isAuthenticated},${error},${loading} `)
-            console.log(`Login Success, Redirecting To: ${redirect}`)
+            console.log(`Redirecting To: ${redirect} for further varification`)
             if(redirect) {
                 navigate(redirect)
             } else {

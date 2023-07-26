@@ -3,7 +3,7 @@ import Error from './Error'
 import Modal from '../components/Modal'
 import { useDispatch, useSelector } from 'react-redux'
 import Table from '../components/Table'
-import { dataByPageNumber, deleteUser } from '../redux/userSlice'
+import { allUsers, dataByPageNumber, deleteUser } from '../redux/userSlice'
 import Search from './Search'
 
 const Users = () => {
