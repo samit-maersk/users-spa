@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import userReducer, { allUsers } from './userSlice'
-import authSlice from './authSlice'
+import authSlice, { status } from './authSlice'
 
 export const store = configureStore({
     reducer: {
@@ -9,7 +9,9 @@ export const store = configureStore({
     },
 })
 console.log("store loaded")
+store.dispatch(status())
 
-if(localStorage.getItem('token')) {
+//TODO: fix this
+if (localStorage.getItem('token')) {
     store.dispatch(allUsers())
 }

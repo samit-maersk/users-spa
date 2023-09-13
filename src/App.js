@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import NavBar from './pages/NavBar';
+import Search from './pages/Search';
 
 function App() {
   return (
@@ -7,7 +8,11 @@ function App() {
     <header>
       <NavBar />
     </header>
-
+    
+    <main className="mt-5 mb-5">
+      <Search />
+    </main>
+    
     <main className="mt-5 mb-5">
       <Outlet />
     </main>

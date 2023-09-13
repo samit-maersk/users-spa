@@ -10,7 +10,6 @@ const Users = () => {
   document.title = 'Users :: all'
   const dispatch = useDispatch()
   const { data, pageData, loading, error } = useSelector((state) => state.users)
-  const [paginatedData, setPaginatedData] = useState([])
 
   //Pagination
   const [page, setPage] = useState(1)

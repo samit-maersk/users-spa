@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
 
 const Dashboard = () => {
-  document.title = 'Users::Dashboard'
+  document.title = 'Users :: Dashboard'
   const dispatch = useDispatch();
   return (
     <div>

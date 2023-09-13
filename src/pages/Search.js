@@ -19,7 +19,7 @@ const Search = () => {
 
     return (
         <div className="d-flex" role="search">
-            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={handleSubmit} disabled={location.pathname !== '/users'}/>
+            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Please search here for user by name or email" onChange={handleSubmit} disabled={location.pathname !== '/users'}/>
         </div>
     )
 }

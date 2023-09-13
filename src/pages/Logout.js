@@ -7,11 +7,14 @@ const Logout = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     
-    setTimeout(() => {
-        navigate("/")
-    },"2000");
+    useEffect(() => {
+        setTimeout(() => {
+            navigate("/")
+        },"2000");
+    
+        dispatch(logout())
+    },[])
 
-    dispatch(logout())
     return <p>Logging out, Please Wait....</p>
 }
 
